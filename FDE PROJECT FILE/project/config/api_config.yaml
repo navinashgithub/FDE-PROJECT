@@ -1,0 +1,78 @@
+api_providers:
+  polygon:
+    name: Polygon.io
+    websocket_url: wss://socket.polygon.io/stocks
+    rest_url: https://api.polygon.io/v2
+    rate_limit: 100
+    priority: 1
+
+  finage:
+    name: Finage
+    websocket_url: wss://w8s.finage.ws
+    rest_url: https://api.finage.co.uk
+    rate_limit: 60
+    priority: 2
+
+  alpha_vantage:
+    name: Alpha Vantage
+    rest_url: https://www.alphavantage.co/query
+    rate_limit: 5
+    priority: 3
+    fallback: true
+
+  fmp:
+    name: Financial Modeling Prep
+    websocket_url: wss://websockets.financialmodelingprep.com
+    rest_url: https://financialmodelingprep.com/api/v3
+    rate_limit: 250
+    priority: 4
+    fallback: true
+
+symbols:
+  - AAPL
+  - GOOGL
+  - MSFT
+  - AMZN
+  - TSLA
+
+window_configurations:
+  - name: 1min
+    duration: 60
+    slide: 60
+  - name: 5min
+    duration: 300
+    slide: 300
+  - name: 15min
+    duration: 900
+    slide: 900
+
+technical_indicators:
+  sma:
+    periods: [20, 50, 200]
+  ema:
+    periods: [12, 26]
+  rsi:
+    period: 14
+    overbought: 70
+    oversold: 30
+  macd:
+    fast_period: 12
+    slow_period: 26
+    signal_period: 9
+  bollinger_bands:
+    period: 20
+    std_dev: 2
+
+anomaly_detection:
+  price_spike_threshold: 0.05
+  volume_spike_threshold: 3.0
+  latency_threshold_ms: 100
+
+monitoring:
+  metrics_interval_seconds: 10
+  alert_cooldown_minutes: 5
+
+storage:
+  retention_days: 365
+  partition_by: day
+  compression: snappy
